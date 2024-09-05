@@ -59,6 +59,7 @@ exports.createUser=async (req,res)=>{
 exports.loginUser=async (req,res)=>{
    try{
       const {email,password}=req.body;
+      console.log(req.body);
       //checking if the details are provided or not
       if(!email || !password){
          return res.send({
@@ -68,7 +69,7 @@ exports.loginUser=async (req,res)=>{
       }
       //checking if the user exists or not
       const user=await usermodel.find({email});
-      if(!user){
+      if(!user.length){
          return res.send({
             message:"User does not exists.Please register first.",
             success:false
